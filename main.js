@@ -1,4 +1,4 @@
-// coming will be most famous JS tech. interview questions
+// coming will be most famous JS tech. interview questions (uncomment to test)
 // classic algorithm challenges
 // 1- reverse a string
 
