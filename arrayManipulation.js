@@ -63,3 +63,41 @@
 //   return res;
 // }
 // console.log(chunck(arr, size));
+
+// _______________________________________________________
+
+// 3 - rotate an array by k steps
+// e.g arr = [1,2,3,4,5,6,7] while k = 3
+// step k = 1 --> arr = [ 7,1,2,3,4,5,6 ]
+// step k = 2 --> arr = [ 6,7,1,2,3,4,5 ]
+// step k = 3 --> arr = [ 5,6,7,1,2,3,4 ]
+
+// nums = [1, 2, 3, 4, 5, 6, 7];
+// k = 3;
+
+// a:
+// function rotate(nums, k) {
+//   k = k % nums.length;
+//   const copyNums = [...nums];
+
+//   for (let i = 0; i < nums.length; i++) {
+//     let idx = i + k;
+//     if (idx > nums.length - 1) {
+//       idx = idx - nums.length;
+//     }
+//     nums[idx] = copyNums[i];
+//   }
+
+//   return nums;
+// }
+// console.log(rotate(nums, k));
+
+// b:
+// function rotate(arr, k) {
+//   k = k % nums.length;
+//   nums.unshift(...nums.splice(nums.length - k, k));
+//   return nums;
+// }
+// console.log(rotate(nums, k));
+
+// _______________________________________________________
