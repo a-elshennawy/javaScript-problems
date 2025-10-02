@@ -81,6 +81,8 @@
 // Fibonacci(3) = [0,1,1]
 // Fibonacci(7) = [0,1,1,2,3,5,8]
 
+// a: normal function
+
 // function fibonacci(n) {
 //   if (n === 0) return [];
 //   if (n === 1) return [0];
@@ -93,6 +95,23 @@
 // }
 
 // console.log(fibonacci(23));
+
+// b: generator function
+// var fibonacciGenerator = function* () {
+//   // *asterik makes ita generator function
+//   let a = 0,
+//     b = 1;
+
+//   while (true) {
+//     yield a; //pause here and return current value
+//     [a, b] = [b, a + b]; //updtae for next iteration
+//   }
+// };
+// const gen = fibonacciGenerator();
+// gen.next().value;
+// gen.next().value;
+// gen.next().value;
+// gen.next().value;
 
 //__________________________________________________________________________
 
