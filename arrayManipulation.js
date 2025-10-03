@@ -234,38 +234,38 @@
 // _______________________________________________________
 
 // 7- Find pairs that sum to a target value
-arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-target = 10;
+// arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+// target = 10;
 
-function findPairsWithSum(arr, target) {
-  // edge case : empty or null array, or less than 2 elements
-  if (!arr || arr.length < 2) return [];
+// function findPairsWithSum(arr, target) {
+//   // edge case : empty or null array, or less than 2 elements
+//   if (!arr || arr.length < 2) return [];
 
-  const seen = new Set(); // Track numbers we've seen
-  const pairs = []; // Store result pairs
-  const usedPairs = new Set(); // Track pairs to avoid duplicates
+//   const seen = new Set(); // Track numbers we've seen
+//   const pairs = []; // Store result pairs
+//   const usedPairs = new Set(); // Track pairs to avoid duplicates
 
-  for (let num of arr) {
-    const complement = target - num;
-    //  if we've seen the complement, we found a pair
-    if (seen.has(complement)) {
-      // Create a unique key for this pair (sorted to handle [2,3] vs [3,2])
-      const pairKey = [
-        Math.min(num, complement),
-        Math.max(num, complement),
-      ].join(",");
+//   for (let num of arr) {
+//     const complement = target - num;
+//     //  if we've seen the complement, we found a pair
+//     if (seen.has(complement)) {
+//       // Create a unique key for this pair (sorted to handle [2,3] vs [3,2])
+//       const pairKey = [
+//         Math.min(num, complement),
+//         Math.max(num, complement),
+//       ].join(",");
 
-      //   only if we haven't used this pair before
-      if (!usedPairs.has(pairKey)) {
-        pairs.push([complement, num]);
-        usedPairs.add(pairKey);
-      }
-    }
-    seen.add(num);
-  }
+//       //   only if we haven't used this pair before
+//       if (!usedPairs.has(pairKey)) {
+//         pairs.push([complement, num]);
+//         usedPairs.add(pairKey);
+//       }
+//     }
+//     seen.add(num);
+//   }
 
-  return pairs;
-}
-console.log(findPairsWithSum(arr, target));
+//   return pairs;
+// }
+// console.log(findPairsWithSum(arr, target));
 
 // _______________________________________________________
