@@ -101,3 +101,115 @@
 // console.log(rotate(nums, k));
 
 // _______________________________________________________
+
+// 4- Find intersection / union of arrays
+// a:  separate arrays
+// arr1 = [1, 2, 3, 4, 5];
+// arr2 = [4, 5, 6, 7, 8];
+// function intersections(arr1, arr2) {
+//   return arr1.filter((e) => arr2.includes(e));
+// }
+
+// console.log(intersections(arr1, arr2));
+
+// b: 2d arrays
+
+// const nums = [
+//   [3, 1, 2, 4, 5],
+//   [1, 2, 3, 4],
+//   [3, 4, 5, 6],
+// ];
+// b-1
+// function findIntersections(arrays) {
+//   // edge cases :
+//   if (arrays.length === 0) return [];
+//   // Handle edge case: only one array, return it as-is
+//   if (arrays.length === 1) return arrays[0];
+
+//   // Start with the first array converted to a Set
+//   // Set allows fast lookups with .has() method
+//   let result = new Set(arrays[0]);
+
+//   // Loop through remaining arrays starting from index 1
+//   for (let i = 1; i < arrays.length; i++) {
+//     // Filter current array to keep only elements that exist in result Set
+//     // Then create a new Set from the filtered elements
+//     // This keeps only common elements between result and current array
+//     result = new Set(arrays[i].filter((x) => result.has(x)));
+//   }
+
+//   // Convert Set back to array using spread operator [...]
+//   // Sort numerically (a - b ensures proper number sorting)
+//   return [...result].sort((a, b) => a - b);
+// }
+// console.log(findIntersections(nums));
+
+// b-2
+// function findIntersections(arrays) {
+//   if (arrays.length === 0) return [];
+
+//   // reduce combines all arrays step by step
+//   // acc = accumulator (starts with first array)
+//   // arr = current array being processed
+
+//   return arrays.reduce((acc, arr) =>
+//     // filter acc to only keep elements exists in curent arr
+//     //  includes() checks if element exists in array
+//     acc.filter((num) => arr.includes(num))
+//   );
+// }
+
+// console.log(findIntersections(nums));
+
+// b-3
+// const findIntersections = (arrays) => {
+//   // Handle edge case: empty input
+//   if (!arrays.length) return [];
+
+//   // Spread operator [...] converts final Set to array
+//   return [
+//     ...// reduce processes arrays one by one
+//     arrays.reduce(
+//       (acc, arr) =>
+//         // Create new Set from filtered array
+//         // Filter keeps only elements that exist in accumulator Set
+//         new Set(arr.filter((x) => acc.has(x))),
+//       // Initial value: first array as a Set
+//       new Set(arrays[0])
+//     ),
+//     // Sort the final array numerically
+//   ].sort((a, b) => a - b);
+// };
+// console.log(findIntersections(nums));
+
+// _______________________________________________________
+
+// 5- Sort an array without using built-in methods
+
+// arr = [1, 3, 5, 4, 8, 2];
+
+// function selectionSort(arr) {
+//   const result = [...arr];
+//   for (let i = 0; i < result.length - 1; i++) {
+//     let minIndex = i;
+
+//     for (let j = i + 1; j < result.length; j++) {
+//       if (result[j] < result[minIndex]) {
+//         minIndex = j;
+//       }
+//     }
+
+//     if (minIndex !== i) {
+//       let temp = result[i];
+//       result[i] = result[minIndex];
+//       result[minIndex] = temp;
+//     }
+//   }
+
+//   return result;
+// }
+// console.log(selectionSort(arr));
+
+// _______________________________________________________
+
+// 6- Merge two sorted arrays
