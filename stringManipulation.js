@@ -1,3 +1,5 @@
+// string manipulation
+
 // 1- Count character occurrences
 // str = "shennawy";
 // // a: normal
