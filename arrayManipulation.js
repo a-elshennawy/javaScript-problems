@@ -213,3 +213,59 @@
 // _______________________________________________________
 
 // 6- Merge two sorted arrays
+// arr1 = [1, 7, 3, 5, 10];
+// arr2 = [2, 4, 5, 6, 11, 45];
+// function mergeSotedArrays(arr1, arr2) {
+//   // edge case: if either array is empty
+//   if (!arr1 || arr1.length === 0)
+//     return arr2 ? [...new Set(arr2.sort((a, b) => a - b))] : [];
+//   if (!arr2 || arr2.length === 0)
+//     return arr1 ? [...new Set(arr1.sort((a, b) => a - b))] : [];
+
+//   // Merge both arrays
+//   const result = [...arr1, ...arr2];
+
+//   // Sort and remove duplicates using Set
+//   return [...new Set(result.sort((a, b) => a - b))];
+// }
+
+// console.log(mergeSotedArrays(arr1, arr2));
+
+// _______________________________________________________
+
+// 7- Find pairs that sum to a target value
+arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+target = 10;
+
+function findPairsWithSum(arr, target) {
+  // edge case : empty or null array, or less than 2 elements
+  if (!arr || arr.length < 2) return [];
+
+  const seen = new Set(); // Track numbers we've seen
+  const pairs = []; // Store result pairs
+  const usedPairs = new Set(); // Track pairs to avoid duplicates
+
+  for (let num of arr) {
+    const complement = target - num;
+    //  if we've seen the complement, we found a pair
+    if (seen.has(complement)) {
+      // Create a unique key for this pair (sorted to handle [2,3] vs [3,2])
+      const pairKey = [
+        Math.min(num, complement),
+        Math.max(num, complement),
+      ].join(",");
+
+      //   only if we haven't used this pair before
+      if (!usedPairs.has(pairKey)) {
+        pairs.push([complement, num]);
+        usedPairs.add(pairKey);
+      }
+    }
+    seen.add(num);
+  }
+
+  return pairs;
+}
+console.log(findPairsWithSum(arr, target));
+
+// _______________________________________________________
