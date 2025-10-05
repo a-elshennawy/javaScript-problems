@@ -143,3 +143,213 @@
 //   return acc;
 // };
 // console.log(reduce(arr2, callback2, {})); //{ apple: 2, banana: 1, orange: 1, mango: 1 }
+
+// ************************************************
+
+// 4- Implement debounce function
+// delays function excution until after wait time has elapsed since last call
+// Useful for limiting API calls, search input, window resize events, etc.
+
+// function debounce(func, wait) {
+//   if (typeof func !== "function") {
+//     throw new TypeError("first arg must be a function");
+//   }
+
+//   let timeoutId = null;
+//   // return debounce function
+//   return function (...args) {
+//     // store context for proper 'this' binding
+//     const context = this;
+
+//     // clear prev timout if it exists
+//     // this resets the timer on each call
+//     if (timeoutId) {
+//       clearTimeout(timeoutId);
+//     }
+
+//     // set new timeout to excute function after wait period
+//     timeoutId = setTimeout(() => {
+//       func.apply(context, args);
+//     }, wait);
+//   };
+// }
+
+// // test
+// let searchCount = 0;
+// const search = debounce((query) => {
+//   searchCount++;
+//   console.log(`serach for: ${query} (call #${searchCount})`);
+// }, 1000);
+
+// // stimulate rapid typing
+// search("a"); // won't execute
+// search("ah"); // won't execute
+// search("ahm"); // won't execute
+// search("ahm"); // won't execute
+// search("ahme"); // won't execute
+// search("ahmed"); // Will execute after 1000ms of no more calls
+
+// ************************************************
+
+// 5- Implement throttle function
+
+// Limits function execution to once per specified time period
+// Useful for scroll events, mouse movements, API rate limiting, etc.
+
+// function throttle(func, wait) {
+//   if (typeof func !== "function") {
+//     throw new TypeError("First argument must be a function");
+//   }
+
+//   let isThrottled = false;
+//   let lastArgs = null;
+//   let lastContext = null;
+
+//   //   return throttle function
+//   return function (...args) {
+//     // if not throttled, execute immediatly
+//     if (!isThrottled) {
+//       func.apply(this, args);
+//       isThrottled = true;
+
+//       //   reset throttle after wait period
+//       setTimeout(() => {
+//         isThrottled = false;
+
+//         // If there were calls during throttle period, execute the last one
+//         if (lastArgs) {
+//           func.apply(lastContext, lastArgs);
+//           lastArgs = null;
+//           lastContext = null;
+
+//           //   re-throttle after executing queued call
+//           isThrottled = true;
+//           setTimeout(() => {
+//             isThrottled = false;
+//           }, wait);
+//         }
+//       }, wait);
+//     } else {
+//       // store last call to execute after throttle period
+//       lastArgs = args;
+//       lastContext = this;
+//     }
+//   };
+// }
+
+// // test:1
+// let scrollCount = 0;
+// const handleScroll = throttle(() => {
+//   scrollCount++;
+//   console.log(`scroll handler excuted! (call#${scrollCount})`);
+// }, 1000);
+
+// for (let i = 0; i < 10; i++) {
+//   handleScroll();
+// }
+// // Executes immediately once, then again after 1000ms
+// // Output: "Scroll handler executed! (call #1)" (immediate)
+// // Output after 1s: "Scroll handler executed! (call #2)" (trailing call)
+
+// // test:2
+// let moveCount = 0;
+// const trackMouse = throttle((x, y) => {
+//   moveCount++;
+//   console.log(`Mouse position: (${x}, ${y}) - call #${moveCount}`);
+// }, 500);
+
+// trackMouse(10, 20); // Executes immediately
+// trackMouse(15, 25); // Queued
+// trackMouse(20, 30); // Queued (replaces previous)
+// trackMouse(25, 35); // Queued (replaces previous)
+// // First call executes immediately
+// // Last call executes after 500ms
+
+// ************************************************
+
+// 6- Implement memoization/caching
+// function memoize(func) {
+//   if (typeof func !== "function") {
+//     throw new TypeError("argument must be a function");
+//   }
+
+//   //   cache to store results (key = stringified arguments, value = results)
+//   const cache = new Map();
+
+//   //   return memoized function
+//   return function (...args) {
+//     // created cache key from arguments
+//     // JSON.stringify handles arrays/objects, primitives work as-is
+//     const key = JSON.stringify(args);
+
+//     // if result exists incahce, return it (0(1) lookup)
+//     if (cache.has(key)) {
+//       console.log(`cache hit for args: ${key}`);
+//       return cache.get(key);
+//     }
+
+//     // otherwise, compute result and store in cache
+//     console.log(`Cache miss for args: ${key}`);
+//     const result = func.apply(this, args);
+//     cache.set(key, result);
+
+//     return result;
+//   };
+// }
+
+// // test: Expensive calculation (factorial)
+// function factorial(n) {
+//   console.log(`computing factorial`);
+//   if (n <= 1) return 1;
+//   return n * factorial(n - 1);
+// }
+// const memoizedFactorial = memoize(factorial);
+
+// console.log("First call:");
+// console.log(memoizedFactorial(5)); // 120 (computes)
+// console.log("\nSecond call (same input):");
+// console.log(memoizedFactorial(5)); // 120 (from cache!)
+// console.log("\nThird call (different input):");
+// console.log(memoizedFactorial(6)); // 720 (computes)
+
+// ************************************************
+
+// 7- Implement curry function
+
+// Transforms a function to be called with arguments one at a time
+// Returns new function until all arguments are collected, then executes
+
+// function curry(func) {
+//   // Edge case: func must be a function
+//   if (typeof func !== "function") {
+//     throw new TypeError("Argument must be a function");
+//   }
+
+//   // Get the number of parameters the function expects
+//   const arity = func.length;
+
+//   // Recursive function to collect arguments
+//   return function curried(...args) {
+//     // If we have enough arguments, execute the function
+//     if (args.length >= arity) {
+//       return func.apply(this, args);
+//     }
+
+//     // Otherwise, return a new function that collects more arguments
+//     return function (...nextArgs) {
+//       // Combine previous and new arguments, recurse
+//       return curried.apply(this, [...args, ...nextArgs]);
+//     };
+//   };
+// }
+// // test
+// function add(a, b, c) {
+//   return a + b + c;
+// }
+
+// const curriedAdd = curry(add);
+// console.log(curriedAdd(1)(2)(3));
+// console.log(curriedAdd(1, 2)(3));
+// console.log(curriedAdd(1, 2, 3));
+
+// ************************************************
