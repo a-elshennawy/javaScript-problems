@@ -54,28 +54,92 @@
 // 2- Implement Array.prototype.filter()
 // Creates a new array with elements that pass the callback test
 
-arr = [1, 2, 3, 4, 11, 6, 7];
-callback = (x) => x > 3;
+// arr = [1, 2, 3, 4, 11, 6, 7];
+// callback = (x) => x > 3;
 
-function filter(arr, callback, thisArg) {
-  // Edge case: empty, null, or undefined array
-  if (!arr || arr.length === 0) return [];
+// function filter(arr, callback, thisArg) {
+//   // Edge case: empty, null, or undefined array
+//   if (!arr || arr.length === 0) return [];
 
-  // Edge case: callback must be a function
+//   // Edge case: callback must be a function
+//   if (typeof callback !== "function") {
+//     throw new TypeError(callback + " is not a function");
+//   }
+
+//   const res = [];
+
+//   for (let i = 0; i < arr.length; i++) {
+//     if (i in arr) {
+//       if (callback.call(thisArg, arr[i], arr)) {
+//         res.push(arr[i]);
+//       }
+//     }
+//   }
+
+//   return res;
+// }
+// console.log(filter(arr, callback));
+
+// ************************************************
+
+// 3- Implement Array.prototype.reduce()
+function reduce(arr, callback, initVal) {
+  if (!arr || arr.length === 0) {
+    // if no initial value and empty array
+    if (initVal === undefined) {
+      throw new TypeError("Reduce of empty array with no initial value");
+    }
+    return initialValue;
+  }
+
   if (typeof callback !== "function") {
     throw new TypeError(callback + " is not a function");
   }
 
-  const res = [];
+  let accumulator;
+  let startIndex;
 
-  for (let i = 0; i < arr.length; i++) {
-    if (i in arr) {
-      if (callback.call(thisArg, arr[i], arr)) {
-        res.push(arr[i]);
+  //   if initial value is provided
+  if (initVal !== undefined) {
+    accumulator = initVal;
+    startIndex = 0;
+  } else {
+    // find first non-hole element to use it as initial value
+    let foundStart = false;
+    for (let i = 0; i < arr.length; i++) {
+      if (i in arr) {
+        accumulator = arr[i];
+        startIndex = i + 1;
+        foundStart = true;
+        break;
       }
+    }
+
+    // if array has only holes and no initial value
+    if (!foundStart) {
+      throw new TypeError("Reduce of empty array with no initial value");
     }
   }
 
-  return res;
+  //   iterate through array from start index
+  for (let i = startIndex; i < arr.length; i++) {
+    // skip holes
+    if (i in arr) {
+      accumulator = callback(accumulator, arr[i], i, arr);
+    }
+  }
+
+  return accumulator;
 }
-console.log(filter(arr, callback));
+arr = [1, 2, 3, 4];
+callback = (acc, val) => acc + val;
+initVal = 0;
+
+console.log(reduce(arr, callback, initVal)); //10 (starting from 0 do sumission one by one)
+
+arr2 = ["apple", "banana", "orange", "apple", "mango"];
+callback2 = (acc, fruit) => {
+  acc[fruit] = (acc[fruit] || 0) + 1;
+  return acc;
+};
+console.log(reduce(arr2, callback2, {})); //{ apple: 2, banana: 1, orange: 1, mango: 1 }
