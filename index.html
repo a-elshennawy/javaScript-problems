@@ -8,10 +8,22 @@
       body {
         background-color: #000;
         color: #fff;
+
+        .draggable {
+          position: fixed;
+          width: 100px;
+          height: 100px;
+          background: radial-gradient(#000, #fd0000);
+          box-shadow: 0 0 10px #fd0000;
+          border-radius: 50%;
+        }
       }
     </style>
   </head>
   <body>
-    <script src="functionImplementaion.js"></script>
+    <div>
+      <div class="draggable"></div>
+    </div>
+    <script src="DOM_Practical.js"></script>
   </body>
 </html>

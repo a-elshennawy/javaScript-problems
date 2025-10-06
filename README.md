@@ -5,8 +5,7 @@
 <li>string manipulation</li>
 <li>Object & Data Structure Challenges</li>
 <li>Function Implementation</li>
-<li>Advanced Challenges</li>
-<li>DOM & Practical Challenges</li>
+<li>DOM & Practical Challenges (you will need to use HTML for this) </li> 
 </ul>
 <hr/>
 <h5>note: just do "<script src="neededFile.js"></script>"</h5>
