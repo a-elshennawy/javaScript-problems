@@ -26,6 +26,8 @@
 // };
 
 // console.log(flat(arr, n));
+// time: O(k), where `k` is the total number of elements.
+// space: O(k) for the output array plus O(n) for the recursion stack
 
 // _______________________________________________________
 
@@ -54,6 +56,9 @@
 // }
 // console.log(chunck(arr, size));
 
+// time: O(n)
+// space: O(n)
+
 // b:
 // function chunck(arr, size) {
 //   const res = [];
@@ -64,11 +69,15 @@
 // }
 // console.log(chunck(arr, size));
 
+// time: O(n)
+// space: O(n)
+
 // _______________________________________________________
 
 // 6- Merge two sorted arrays
 // arr1 = [1, 7, 3, 5, 10];
 // arr2 = [2, 4, 5, 6, 11, 45];
+
 // function mergeSotedArrays(arr1, arr2) {
 //   // edge case: if either array is empty
 //   if (!arr1 || arr1.length === 0)
@@ -84,6 +93,9 @@
 // }
 
 // console.log(mergeSotedArrays(arr1, arr2));
+
+// time: O((n + m) log (n + m))
+// space: O(n + m)
 
 // _______________________________________________________
 
@@ -120,6 +132,10 @@
 
 //   return pairs;
 // }
+
 // console.log(findPairsWithSum(arr, target));
+
+// time: O(n)
+// space: O(n)
 
 // _______________________________________________________
