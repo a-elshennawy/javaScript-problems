@@ -22,6 +22,11 @@ function infiniteScroll(container, loadMore) {
 //   apendToDom(items);
 // });
 
+// time: O(1)
+// space: O(1)
+// The total runtime depends on
+// how often scroll events occur and the complexity of loadMore.
+
 //###################################################################
 
 // 2- DRAG AND DROP
@@ -48,6 +53,9 @@ function makeDraggable(element) {
 }
 
 makeDraggable(document.querySelector(".draggable"));
+
+// time: O(n), wjere n is number of mouse events
+// spcae: O(1)
 
 //###################################################################
 
@@ -86,6 +94,9 @@ const modal = new Modal(
   '<h2>Hello</h2><button onclick="modal.close()">Close</button>'
 );
 modal.open();
+
+// time: O(1) for setup per instance, assuming fixed content size.
+// space: O(1) per instance, dominated by DOM elements and content size.
 
 //###################################################################
 // 4- stopwatch / timer
@@ -162,6 +173,10 @@ class stopwatch {
 // option 3:
 // check stopWatch.html
 
+// time: O(1)
+// space: O(1)
+// for each method and overall class, respectively.
+
 //###################################################################
 
 // 5- to-do list
@@ -199,6 +214,14 @@ class TodoList {
 }
 
 // check toDo.html for visual illustration
+
+// time:
+// add(text): O(1)
+// delete(id): O(n)
+// edit(id, newText): O(n)
+// toggle(id): O(n)
+// getAll(): O(1)
+// space: O(n), where n is the number of items in the list
 
 //###################################################################
 
@@ -246,6 +269,9 @@ console.log(new calculator().add(5).multiply(2).getResult());
 // option 2:
 // check calculator.html
 
+// time: Each method (add, sub, multiply, divide, clear, getResult) executes in O(1)
+// space: O(1), as the class maintains a single numeric property (result)
+
 //###################################################################
 
 //  7- autocomplete feature
@@ -267,3 +293,6 @@ class autocomplete {
 // usage:
 const ac = new autocomplete(["apple", "samsung", "nokia", "HTC", "HP", "dell"]);
 console.log(ac.search("ap"));
+
+// time: O(n * m), n is items & m is length of each item
+// space: O(n)
