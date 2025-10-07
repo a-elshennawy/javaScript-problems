@@ -3,6 +3,7 @@
 // 1- Count character occurrences
 // str = "shennawy";
 // // a: normal
+
 // function countCharOcc(str) {
 //   if (!str || str.length === 0) return {};
 
@@ -15,10 +16,15 @@
 //   }
 //   return charCount;
 // }
+
 // console.log(countCharOcc(str));
+
+// time: O(n)
+// space: O(n)
 
 // // b: for special characters and non-string keys
 // str2 = "shenno1123";
+
 // function countCharOccMap(str) {
 //   if (!str || str.length === 0) return {};
 
@@ -29,12 +35,17 @@
 //   }
 //   return charCount;
 // }
+
 // console.log(countCharOccMap(str2));
+
+// time: O(n)
+// space: O(k) , where k is the number of unique characters in the string
 
 // ######################################################
 
 // 2-  Find the longest word in a string
 // str = "hello, i am shennawy and i wanna kill myself";
+
 // function findLongestWord(str) {
 //   if (!str || str.trim().length === 0) return "";
 
@@ -55,14 +66,19 @@
 
 //   return longestWord;
 // }
+
 // console.log(findLongestWord(str));
+
+// time: O(n)
+// space: O(n)
 
 // ######################################################
 
 // 2- Capitalize the first letter of each word
 
-// str = "hello, i am shennawy and i wanna kill myself";
+// str = "hello, i am shennawy and i am totally fine :)";
 // a: normal way
+
 // function capitalizeWords(str) {
 //   if (!str || str.length === 0) return "";
 //   // Split by spaces, capitalize each word, and join back
@@ -79,19 +95,29 @@
 
 // console.log(capitalizeWords(str));
 
+// time: O(n)
+// space: O(n)
+
 // b: using regex
+
 // function capitalizeWords(str) {
 //   if (!str || str.length === 0) return "";
 
 //   return str.replace(/\b\w/g, (char) => char.toUpperCase());
 // }
+
 // console.log(capitalizeWords(str));
+
+// time: O(n)
+// space: O(n)
 
 // ######################################################
 
 // 3- Reverse words in a sentence
+
 // str = "hello, i'm cristiano ronaldo";
 // a: with built-in
+
 // function reverseWords(str) {
 //   if (!str || str.trim().length === 0) return "";
 
@@ -102,9 +128,14 @@
 //     .reverse()
 //     .join(" ");
 // }
+
 // console.log(reverseWords(str));
 
+// time: O(n)
+// space: O(n)
+
 // b: no built-in
+
 // function reverseWords(str) {
 //   if (!str || str.trim().length === 0) return "";
 
@@ -120,6 +151,9 @@
 // }
 
 // console.log(reverseWords(str));
+
+// time: O(n)
+// space: O(n)
 
 // ######################################################
 
@@ -165,6 +199,9 @@
 
 // console.log(isBalanced(str));
 
+// time: O(n)
+// space: O(n)
+
 // ######################################################
 
 // 5- String compression (e.g., "aaa" → "a3")
@@ -194,4 +231,8 @@
 
 //   return compressed.length < str.length ? compressed : str;
 // }
+
 // console.log(compressString(str));
+
+// time: O(n)
+// space: O(n)
