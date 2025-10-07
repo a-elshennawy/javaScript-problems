@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculator</title>
+    <style>
+      body {
+        background: #000;
+        color: #fff;
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+
+      .calculator {
+        background: #222;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+      }
+
+      .display {
+        background: #000;
+        color: #0f0;
+        padding: 20px;
+        font-size: 32px;
+        text-align: right;
+        margin-bottom: 20px;
+        border-radius: 5px;
+        min-height: 50px;
+        word-break: break-all;
+      }
+
+      .buttons {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+      }
+
+      button {
+        padding: 20px;
+        font-size: 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        background: #444;
+        color: #fff;
+        transition: background 0.2s;
+      }
+
+      button:hover {
+        background: #666;
+      }
+
+      button:active {
+        transform: scale(0.95);
+      }
+
+      .operator {
+        background: #ff9500;
+      }
+
+      .operator:hover {
+        background: #ffb143;
+      }
+
+      .equals {
+        background: #0066cc;
+        grid-column: span 2;
+      }
+
+      .equals:hover {
+        background: #0080ff;
+      }
+
+      .clear {
+        background: #cc0000;
+        grid-column: span 2;
+      }
+
+      .clear:hover {
+        background: #ff0000;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="calculator">
+      <div class="display" id="display">0</div>
+      <div class="buttons">
+        <button onclick="appendNumber('7')">7</button>
+        <button onclick="appendNumber('8')">8</button>
+        <button onclick="appendNumber('9')">9</button>
+        <button class="operator" onclick="setOperation('÷')">÷</button>
+
+        <button onclick="appendNumber('4')">4</button>
+        <button onclick="appendNumber('5')">5</button>
+        <button onclick="appendNumber('6')">6</button>
+        <button class="operator" onclick="setOperation('×')">×</button>
+
+        <button onclick="appendNumber('1')">1</button>
+        <button onclick="appendNumber('2')">2</button>
+        <button onclick="appendNumber('3')">3</button>
+        <button class="operator" onclick="setOperation('-')">-</button>
+
+        <button onclick="appendNumber('0')">0</button>
+        <button onclick="appendNumber('.')">.</button>
+        <button class="operator" onclick="setOperation('+')">+</button>
+        <button class="equals" onclick="calculate()">=</button>
+
+        <button class="clear" onclick="clearAll()">Clear</button>
+      </div>
+    </div>
+
+    <script>
+      class calculator {
+        constructor() {
+          this.result = 0;
+        }
+
+        add(n) {
+          this.result += n;
+          return this;
+        }
+
+        sub(n) {
+          this.result -= n;
+          return this;
+        }
+
+        multiply(n) {
+          this.result *= n;
+          return this;
+        }
+
+        divide(n) {
+          if (n === 0) throw new Error("division by zero ?? really ??");
+          this.result /= n;
+          return this;
+        }
+
+        clear() {
+          this.result = 0;
+          return this;
+        }
+
+        getResult() {
+          return this.result;
+        }
+      }
+
+      // Create calculator instance
+      const calc = new calculator();
+
+      // State variables
+      let currentInput = "0";
+      let operation = null;
+      let previousValue = null;
+
+      // Update display
+      function updateDisplay() {
+        document.getElementById("display").textContent = currentInput;
+      }
+
+      // Append number to current input
+      function appendNumber(num) {
+        if (currentInput === "0" && num !== ".") {
+          currentInput = num;
+        } else if (num === "." && currentInput.includes(".")) {
+          return; // Prevent multiple decimals
+        } else {
+          currentInput += num;
+        }
+        updateDisplay();
+      }
+
+      // Set operation
+      function setOperation(op) {
+        if (previousValue !== null && operation) {
+          calculate(); // Chain operations
+        }
+        previousValue = parseFloat(currentInput);
+        operation = op;
+        currentInput = "0";
+      }
+
+      // Calculate result
+      function calculate() {
+        if (operation === null || previousValue === null) return;
+
+        const current = parseFloat(currentInput);
+
+        try {
+          calc.clear();
+          calc.result = previousValue;
+
+          switch (operation) {
+            case "+":
+              calc.add(current);
+              break;
+            case "-":
+              calc.sub(current);
+              break;
+            case "×":
+              calc.multiply(current);
+              break;
+            case "÷":
+              calc.divide(current);
+              break;
+          }
+
+          currentInput = calc.getResult().toString();
+          operation = null;
+          previousValue = null;
+          updateDisplay();
+        } catch (error) {
+          currentInput = "Error";
+          updateDisplay();
+          setTimeout(() => {
+            clearAll();
+          }, 1500);
+        }
+      }
+
+      // Clear everything
+      function clearAll() {
+        calc.clear();
+        currentInput = "0";
+        operation = null;
+        previousValue = null;
+        updateDisplay();
+      }
+
+      // Keyboard support
+      document.addEventListener("keydown", (e) => {
+        if (e.key >= "0" && e.key <= "9") appendNumber(e.key);
+        if (e.key === ".") appendNumber(".");
+        if (e.key === "+") setOperation("+");
+        if (e.key === "-") setOperation("-");
+        if (e.key === "*") setOperation("×");
+        if (e.key === "/") {
+          e.preventDefault();
+          setOperation("÷");
+        }
+        if (e.key === "Enter" || e.key === "=") calculate();
+        if (e.key === "Escape") clearAll();
+      });
+    </script>
+  </body>
+</html>

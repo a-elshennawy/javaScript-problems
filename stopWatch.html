@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Stopwatch</title>
+    <style>
+      body {
+        background: #000;
+        color: #fff;
+        font-family: monospace;
+        text-align: center;
+        padding: 50px;
+      }
+      #display {
+        font-size: 48px;
+        margin: 20px;
+      }
+      button {
+        font-size: 18px;
+        margin: 5px;
+        padding: 10px 20px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="display">00:00:00</div>
+    <button onclick="timer.start()">Start</button>
+    <button onclick="timer.pause()">Pause</button>
+    <button onclick="timer.reset(); updateDisplay()">Reset</button>
+
+    <script>
+      class stopwatch {
+        constructor() {
+          this.startTime = 0;
+          this.elapsed = 0;
+          this.interval = null;
+        }
+
+        start() {
+          if (this.interval) return;
+          this.startTime = Date.now() - this.elapsed;
+          this.interval = setInterval(() => {
+            this.elapsed = Date.now() - this.startTime;
+          }, 10);
+        }
+
+        pause() {
+          clearInterval(this.interval);
+          this.interval = null;
+        }
+
+        reset() {
+          this.pause();
+          this.elapsed = 0;
+        }
+
+        getTime() {
+          return this.elapsed;
+        }
+      }
+
+      // Create instance
+      const timer = new stopwatch();
+
+      // Update display every 10ms
+      function updateDisplay() {
+        const ms = timer.getTime();
+        const seconds = Math.floor(ms / 1000);
+        const minutes = Math.floor(seconds / 60);
+        const hours = Math.floor(minutes / 60);
+
+        const display =
+          String(hours).padStart(2, "0") +
+          ":" +
+          String(minutes % 60).padStart(2, "0") +
+          ":" +
+          String(seconds % 60).padStart(2, "0");
+
+        document.getElementById("display").textContent = display;
+      }
+
+      setInterval(updateDisplay, 10);
+    </script>
+  </body>
+</html>

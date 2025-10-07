@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To Do</title>
+    <style>
+      body {
+        background: #000;
+        color: #fff;
+        font-family: Arial, sans-serif;
+        max-width: 600px;
+        margin: 50px auto;
+        padding: 20px;
+      }
+
+      h1 {
+        text-align: center;
+      }
+
+      .input-container {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 20px;
+      }
+
+      input {
+        flex: 1;
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #444;
+        background: #222;
+        color: #fff;
+      }
+
+      button {
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        background: #444;
+        color: #fff;
+        border: none;
+      }
+
+      button:hover {
+        background: #666;
+      }
+
+      .todo-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px;
+        background: #222;
+        margin-bottom: 10px;
+        border-radius: 4px;
+      }
+
+      .todo-item.completed .todo-text {
+        text-decoration: line-through;
+        opacity: 0.6;
+      }
+
+      .todo-text {
+        flex: 1;
+        cursor: pointer;
+      }
+
+      .todo-item button {
+        padding: 5px 10px;
+        font-size: 14px;
+      }
+
+      .edit-btn {
+        background: #0066cc;
+      }
+
+      .delete-btn {
+        background: #cc0000;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Todo List</h1>
+
+    <div class="input-container">
+      <input type="text" id="todoInput" placeholder="Enter a new task..." />
+      <button onclick="addTodo()">Add</button>
+    </div>
+
+    <div id="todoList"></div>
+
+    <script>
+      class TodoList {
+        constructor() {
+          this.todos = [];
+          this.nextId = 1;
+        }
+
+        add(text) {
+          const todo = { id: this.nextId++, text, completed: false };
+          this.todos.push(todo);
+          return todo;
+        }
+
+        delete(id) {
+          const index = this.todos.findIndex((t) => t.id === id);
+          if (index !== -1) this.todos.splice(index, 1); // Fixed: was -1, should be 1
+        }
+
+        edit(id, newText) {
+          const todo = this.todos.find((t) => t.id === id);
+          if (todo) todo.text = newText;
+        }
+
+        toggle(id) {
+          const todo = this.todos.find((t) => t.id === id);
+          if (todo) todo.completed = !todo.completed;
+        }
+
+        getAll() {
+          return this.todos;
+        }
+      }
+
+      // Create instance
+      const todoList = new TodoList();
+
+      // Render todos to the DOM
+      function render() {
+        const container = document.getElementById("todoList");
+        container.innerHTML = "";
+
+        todoList.getAll().forEach((todo) => {
+          const div = document.createElement("div");
+          div.className = `todo-item ${todo.completed ? "completed" : ""}`;
+
+          div.innerHTML = `
+            <span class="todo-text" onclick="toggleTodo(${todo.id})">${todo.text}</span>
+            <button class="edit-btn" onclick="editTodo(${todo.id})">Edit</button>
+            <button class="delete-btn" onclick="deleteTodo(${todo.id})">Delete</button>
+          `;
+
+          container.appendChild(div);
+        });
+      }
+
+      // Add new todo
+      function addTodo() {
+        const input = document.getElementById("todoInput");
+        const text = input.value.trim();
+
+        if (text) {
+          todoList.add(text);
+          input.value = "";
+          render();
+        }
+      }
+
+      // Delete todo
+      function deleteTodo(id) {
+        todoList.delete(id);
+        render();
+      }
+
+      // Edit todo
+      function editTodo(id) {
+        const newText = prompt("Edit task:");
+        if (newText && newText.trim()) {
+          todoList.edit(id, newText.trim());
+          render();
+        }
+      }
+
+      // Toggle complete/incomplete
+      function toggleTodo(id) {
+        todoList.toggle(id);
+        render();
+      }
+
+      // Allow Enter key to add todo
+      document.getElementById("todoInput").addEventListener("keypress", (e) => {
+        if (e.key === "Enter") addTodo();
+      });
+    </script>
+  </body>
+</html>
