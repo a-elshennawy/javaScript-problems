@@ -49,6 +49,9 @@
 
 // console.log(map(arr2, callback2));
 
+// time: O(n)
+// space: O(n)
+
 // ************************************************
 
 // 2- Implement Array.prototype.filter()
@@ -78,11 +81,16 @@
 
 //   return res;
 // }
+
 // console.log(filter(arr, callback));
+
+// time: O(n)
+// space: O(n)
 
 // ************************************************
 
 // 3- Implement Array.prototype.reduce()
+
 // function reduce(arr, callback, initVal) {
 //   if (!arr || arr.length === 0) {
 //     // if no initial value and empty array
@@ -131,6 +139,7 @@
 
 //   return accumulator;
 // }
+
 // arr = [1, 2, 3, 4];
 // callback = (acc, val) => acc + val;
 // initVal = 0;
@@ -143,6 +152,9 @@
 //   return acc;
 // };
 // console.log(reduce(arr2, callback2, {})); //{ apple: 2, banana: 1, orange: 1, mango: 1 }
+
+// time: O(n)
+// space: O(1)
 
 // ************************************************
 
@@ -188,6 +200,9 @@
 // search("ahm"); // won't execute
 // search("ahme"); // won't execute
 // search("ahmed"); // Will execute after 1000ms of no more calls
+
+// time: O(1)
+// space: O(1)
 
 // ************************************************
 
@@ -265,9 +280,13 @@
 // // First call executes immediately
 // // Last call executes after 500ms
 
+// time: O(1)
+// space: O(1)
+
 // ************************************************
 
 // 6- Implement memoization/caching
+
 // function memoize(func) {
 //   if (typeof func !== "function") {
 //     throw new TypeError("argument must be a function");
@@ -312,6 +331,9 @@
 // console.log("\nThird call (different input):");
 // console.log(memoizedFactorial(6)); // 720 (computes)
 
+// time: O(m * T_original) for first occurrences & O(k) for cache lookup
+// space: O(m), where m is the number of calls.
+
 // ************************************************
 
 // 7- Implement curry function
@@ -342,6 +364,7 @@
 //     };
 //   };
 // }
+
 // // test
 // function add(a, b, c) {
 //   return a + b + c;
@@ -351,5 +374,8 @@
 // console.log(curriedAdd(1)(2)(3));
 // console.log(curriedAdd(1, 2)(3));
 // console.log(curriedAdd(1, 2, 3));
+
+// time: O(arity^2) in the worst case.
+// space: O(arity^2) in the worst case.
 
 // ************************************************
