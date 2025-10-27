@@ -1,42 +1,42 @@
 // string manipulation
 
 // 1- Count character occurrences
-// str = "shennawy";
+str = "shennawy";
 // // a: normal
 
-// function countCharOcc(str) {
-//   if (!str || str.length === 0) return {};
+function countCharOcc(str) {
+  if (!str || str.length === 0) return {};
 
-//   const charCount = {};
+  const charCount = {};
 
-//   //   iterate through each character
-//   for (let char of str) {
-//     // inc count if exists, otherwise init to 1
-//     charCount[char] = (charCount[char] || 0) + 1;
-//   }
-//   return charCount;
-// }
+  //   iterate through each character
+  for (let char of str) {
+    // inc count if exists, otherwise init to 1
+    charCount[char] = (charCount[char] || 0) + 1;
+  }
+  return charCount;
+}
 
-// console.log(countCharOcc(str));
+console.log(countCharOcc(str));
 
 // time: O(n)
 // space: O(n)
 
 // // b: for special characters and non-string keys
-// str2 = "shenno1123";
+str2 = "shenno1123";
 
-// function countCharOccMap(str) {
-//   if (!str || str.length === 0) return {};
+function countCharOccMap(str) {
+  if (!str || str.length === 0) return {};
 
-//   const charCount = new Map();
+  const charCount = new Map();
 
-//   for (let char of str) {
-//     charCount.set(char, (charCount.get(char) || 0) + 1);
-//   }
-//   return charCount;
-// }
+  for (let char of str) {
+    charCount.set(char, (charCount.get(char) || 0) + 1);
+  }
+  return charCount;
+}
 
-// console.log(countCharOccMap(str2));
+console.log(countCharOccMap(str2));
 
 // time: O(n)
 // space: O(k) , where k is the number of unique characters in the string
@@ -44,69 +44,69 @@
 // ######################################################
 
 // 2-  Find the longest word in a string
-// str = "hello, i am shennawy and i wanna kill myself";
+string = "hello, i am shennawy and i want to sleep";
 
-// function findLongestWord(str) {
-//   if (!str || str.trim().length === 0) return "";
+function findLongestWord(str) {
+  if (!str || str.trim().length === 0) return "";
 
-//   //   split  by whitespace and filter out empty string
-//   const words = str.trim().split(/\s+/);
+  //   split  by whitespace and filter out empty string
+  const words = str.trim().split(/\s+/);
 
-//   let longestWord = "";
+  let longestWord = "";
 
-//   //   iterate through each word to find the longest
-//   for (let word of words) {
-//     // remove punctuation from word for accurate length
-//     const cleanWord = word.replace(/[^\w]/g, "");
+  //   iterate through each word to find the longest
+  for (let word of words) {
+    // remove punctuation from word for accurate length
+    const cleanWord = word.replace(/[^\w]/g, "");
 
-//     if (cleanWord.length > longestWord.length) {
-//       longestWord = cleanWord;
-//     }
-//   }
+    if (cleanWord.length > longestWord.length) {
+      longestWord = cleanWord;
+    }
+  }
 
-//   return longestWord;
-// }
+  return longestWord;
+}
 
-// console.log(findLongestWord(str));
+console.log(findLongestWord(string));
 
 // time: O(n)
 // space: O(n)
 
 // ######################################################
 
-// 2- Capitalize the first letter of each word
+// 3- Capitalize the first letter of each word
 
-// str = "hello, i am shennawy and i am totally fine :)";
+string_2 = "hello, i am shennawy and i am totally fine :)";
 // a: normal way
 
-// function capitalizeWords(str) {
-//   if (!str || str.length === 0) return "";
-//   // Split by spaces, capitalize each word, and join back
-//   return str
-//     .split(" ")
-//     .map((word) => {
-//       // Handle empty strings from multiple spaces
-//       if (word.length === 0) return word;
-//       // Capitalize first letter and concatenate with rest of word (lowercase)
-//       return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
-//     })
-//     .join(" ");
-// }
+function capitalizeWords(str) {
+  if (!str || str.length === 0) return "";
+  // Split by spaces, capitalize each word, and join back
+  return str
+    .split(" ")
+    .map((word) => {
+      // Handle empty strings from multiple spaces
+      if (word.length === 0) return word;
+      // Capitalize first letter and concatenate with rest of word (lowercase)
+      return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+    })
+    .join(" ");
+}
 
-// console.log(capitalizeWords(str));
+console.log(capitalizeWords(string_2));
 
 // time: O(n)
 // space: O(n)
 
 // b: using regex
 
-// function capitalizeWords(str) {
-//   if (!str || str.length === 0) return "";
+function capitalizeWordsRegex(str) {
+  if (!str || str.length === 0) return "";
 
-//   return str.replace(/\b\w/g, (char) => char.toUpperCase());
-// }
+  return str.replace(/\b\w/g, (char) => char.toUpperCase());
+}
 
-// console.log(capitalizeWords(str));
+console.log(capitalizeWordsRegex(string_2));
 
 // time: O(n)
 // space: O(n)
@@ -115,124 +115,76 @@
 
 // 3- Reverse words in a sentence
 
-// str = "hello, i'm cristiano ronaldo";
+words = "hello, i'm cristiano ronaldo";
+
 // a: with built-in
+function reverseWords(str) {
+  if (!str || str.trim().length === 0) return "";
 
-// function reverseWords(str) {
-//   if (!str || str.trim().length === 0) return "";
+  //   split by whitespace, reverse array, join with single space
+  return str
+    .trim() //remove leading / trailling spaces
+    .split(/\s+/) //split by one or more spaces
+    .reverse()
+    .join(" ");
+}
 
-//   //   split by whitespace, reverse array, join with single space
-//   return str
-//     .trim() //remove leading /  trailling spaces
-//     .split(/\s+/) //split by one or more spaces
-//     .reverse()
-//     .join(" ");
-// }
-
-// console.log(reverseWords(str));
+console.log(reverseWords(words));
 
 // time: O(n)
 // space: O(n)
 
 // b: no built-in
+function reverseWordsNoBuiltIn(str) {
+  if (!str || str.trim().length === 0) return "";
 
-// function reverseWords(str) {
-//   if (!str || str.trim().length === 0) return "";
+  const words = str.trim().split(/\s+/);
+  const reversed = [];
 
-//   const words = str.trim().split(/\s+/);
-//   const reversed = [];
+  //  iterate backwords through words array
+  for (let i = words.length - 1; i >= 0; i--) {
+    reversed.push(words[i]);
+  }
 
-//   //   iterate backwords through words array
-//   for (let i = words.length - 1; i >= 0; i--) {
-//     reversed.push(words[i]);
-//   }
+  return reversed.join(" ");
+}
 
-//   return reversed.join(" ");
-// }
-
-// console.log(reverseWords(str));
-
-// time: O(n)
-// space: O(n)
-
-// ######################################################
-
-// 4- Check for balanced parentheses/brackets
-
-// str =
-//   "this function() should recognise[] true {parentheses / brackets} balance () or [] or {}";
-
-// function isBalanced(str) {
-//   if (!str || str.length === 0) return true; //considered balanced
-
-//   const stack = [];
-
-//   // map closing brackets to their opening counterparts
-//   const bracketMap = {
-//     ")": "(",
-//     "}": "{",
-//     "]": "[",
-//   };
-
-//   // opening brackets set for quick lookup
-//   const openBrackets = new Set(["(", "{", "["]);
-
-//   for (let char of str) {
-//     // if it's an opening bracket, push to stack
-//     if (openBrackets.has(char)) {
-//       stack.push(char);
-//     }
-//     //   if it's a closing bracket
-//     else if (char in bracketMap) {
-//       // check if stack is empty (no matching opening bracket)
-//       if (stack.length === 0) return false;
-
-//       // pop from stack and check if it matches
-//       const top = stack.pop();
-//       if (top !== bracketMap[char]) return false;
-//     }
-//     // ignore other letters
-
-//     return stack.length === 0;
-//   }
-// }
-
-// console.log(isBalanced(str));
+console.log(reverseWordsNoBuiltIn(words));
 
 // time: O(n)
 // space: O(n)
 
 // ######################################################
 
-// 5- String compression (e.g., "aaa" → "a3")
+// 4- String compression (e.g., "aaa" → "a3")
 
-// str = "aaaaaa ffffrickkk";
+string_4 = "aaaaaa bbbbbbb ccccc";
 
-// function compressString(str) {
-//   if (!str || str.length === 0) return "";
-//   if (str.length === 1) return str;
+function compressString(str) {
+  if (!str || str.length === 0) return "";
+  if (str.length === 1) return str;
 
-//   let compressed = "";
-//   let count = 1;
+  let compressed = "";
+  let count = 1;
 
-//   for (let i = 0; i < str.length; i++) {
-//     // if next char is the same, increment count
-//     if (i + 1 < str.length && str[i] === str[i + 1]) {
-//       count++;
-//     } else {
-//       // add char and count to result
-//       compressed += str[i];
-//       if (count > 1) {
-//         compressed += count;
-//       }
-//       count = 1; //reset count
-//     }
-//   }
+  for (let i = 0; i < str.length; i++) {
+    // if next char is the same, increment count
+    if (i + 1 < str.length && str[i] === str[i + 1]) {
+      count++;
+    } else {
+      // add char and count to result
+      compressed += str[i];
+      if (count > 1) {
+        compressed += count;
+      }
+      count = 1; //reset count
+    }
+  }
 
-//   return compressed.length < str.length ? compressed : str;
-// }
+  return compressed.length < str.length ? compressed : str;
+}
 
-// console.log(compressString(str));
+console.log(compressString(string_4));
 
 // time: O(n)
 // space: O(n)

@@ -1,12 +1,12 @@
 <h1>*this repo is for javascript famous problems you could get asked in a technical interview:</h1>
-<ul>
+<ol>
 <li>classic algorithms</li>
 <li>array manipulation</li>
 <li>string manipulation</li>
 <li>Object & Data Structure Challenges</li>
 <li>Function Implementation</li>
 <li>DOM & Practical Challenges (you will need to use HTML livserver for this) </li> 
-</ul>
+</ol>
 <hr/>
 <h5>notes: just do "<script src="neededFile.js"></script>" <br/> after each challenge you will also get what's the methods Time / Space Complexity</h5>
 <h5>Time Complexity: measures how long your code takes to run as the input size grows. It's about speed. <br/>
